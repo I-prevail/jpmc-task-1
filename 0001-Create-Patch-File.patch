@@ -1,0 +1,217 @@
+From 1e6c62116acc7d9906796b65d5004387ab6bf63a Mon Sep 17 00:00:00 2001
+From: Pratyay Amrit <pratyay.amrit11111@gmail.com>
+Date: Sat, 1 Oct 2022 09:17:30 +0530
+Subject: [PATCH] Create Patch File
+
+---
+ 0001-Create-Patch-File.patch        | 158 ----------------------------
+ __pycache__/client3.cpython-310.pyc | Bin 1064 -> 1107 bytes
+ client_test.py                      |   2 +-
+ 3 files changed, 1 insertion(+), 159 deletions(-)
+ delete mode 100644 0001-Create-Patch-File.patch
+
+diff --git a/0001-Create-Patch-File.patch b/0001-Create-Patch-File.patch
+deleted file mode 100644
+index a726d41..0000000
+--- a/0001-Create-Patch-File.patch
++++ /dev/null
+@@ -1,158 +0,0 @@
+-From be5392a7f10f71ecab4c37d9705c8cfdb840de3c Mon Sep 17 00:00:00 2001
+-From: Pratyay amrit <pratyay.amrit11111@gmail.com>
+-Date: Fri, 30 Sep 2022 22:49:39 +0530
+-Subject: [PATCH] Create Patch File
+-
+----
+- client.py  | 63 ------------------------------------------------------
+- client3.py | 52 +++++++++++++++++++++++---------------------
+- 2 files changed, 28 insertions(+), 87 deletions(-)
+- delete mode 100644 client.py
+-
+-diff --git a/client.py b/client.py
+-deleted file mode 100644
+-index 65bf936..0000000
+---- a/client.py
+-+++ /dev/null
+-@@ -1,63 +0,0 @@
+--################################################################################
+--#
+--#  Permission is hereby granted, free of charge, to any person obtaining a
+--#  copy of this software and associated documentation files (the "Software"),
+--#  to deal in the Software without restriction, including without limitation
+--#  the rights to use, copy, modify, merge, publish, distribute, sublicense,
+--#  and/or sell copies of the Software, and to permit persons to whom the
+--#  Software is furnished to do so, subject to the following conditions:
+--#
+--#  The above copyright notice and this permission notice shall be included in
+--#  all copies or substantial portions of the Software.
+--#
+--#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+--#  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+--#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+--#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+--#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+--#  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+--#  DEALINGS IN THE SOFTWARE.
+--
+--import json
+--import random
+--import urllib.request
+--
+--# Server API URLs
+--QUERY = "http://localhost:8080/query?id={}"
+--
+--# 500 server request
+--N = 500
+--
+--
+--def getDataPoint(quote):
+--    """ Produce all the needed values to generate a datapoint """
+--    """ ------------- Update this function ------------- """
+--    stock = quote['stock']
+--    bid_price = float(quote['top_bid']['price'])
+--    ask_price = float(quote['top_ask']['price'])
+--    price = (bid_price + ask_price)/2
+--    return stock, bid_price, ask_price, price
+--
+--
+--def getRatio(price_a, price_b):
+--    """ Get ratio of price_a and price_b """
+--    """ ------------- Update this function ------------- """
+--    if(price_b == 0):
+--        return
+--    return price_a/price_b
+--
+--
+--# Main
+--if __name__ == "__main__":
+--    # Query the price once every N seconds.
+--    for _ in range(N):
+--        quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
+--
+--        """ ----------- Update to get the ratio --------------- """
+--        prices = {}
+--        for quote in quotes:
+--            stock, bid_price, ask_price, price = getDataPoint(quote)
+--            prices[stock] = price
+--            print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+--
+--        print("Ratio %s" % (getRatio(prices['ABC'], prices['DEF'])))
+-diff --git a/client3.py b/client3.py
+-index f1771c3..65bf936 100644
+---- a/client3.py
+-+++ b/client3.py
+-@@ -18,10 +18,9 @@
+- #  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+- #  DEALINGS IN THE SOFTWARE.
+- 
+--import urllib.request
+--import time
+- import json
+- import random
+-+import urllib.request
+- 
+- # Server API URLs
+- QUERY = "http://localhost:8080/query?id={}"
+-@@ -29,31 +28,36 @@ QUERY = "http://localhost:8080/query?id={}"
+- # 500 server request
+- N = 500
+- 
+-+
+- def getDataPoint(quote):
+--	""" Produce all of the needed values to generate a datapoint """
+--	""" ------------- Update this function ------------- """
+--	stock = quote['stock']
+--	bid_price = float(quote['top_bid']['price'])
+--	ask_price = float(quote['top_ask']['price'])
+--	price = bid_price
+--	return stock, bid_price, ask_price, price
+-+    """ Produce all the needed values to generate a datapoint """
+-+    """ ------------- Update this function ------------- """
+-+    stock = quote['stock']
+-+    bid_price = float(quote['top_bid']['price'])
+-+    ask_price = float(quote['top_ask']['price'])
+-+    price = (bid_price + ask_price)/2
+-+    return stock, bid_price, ask_price, price
+-+
+- 
+- def getRatio(price_a, price_b):
+--	""" Get ratio of price_a and price_b """
+--	""" ------------- Update this function ------------- """
+--	""" Also create some unit tests for this function in client_test.py """
+--	return 1
+-+    """ Get ratio of price_a and price_b """
+-+    """ ------------- Update this function ------------- """
+-+    if(price_b == 0):
+-+        return
+-+    return price_a/price_b
+-+
+- 
+- # Main
+- if __name__ == "__main__":
+--
+--	# Query the price once every N seconds.
+--	for _ in iter(range(N)):
+--		quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
+--
+--		""" ----------- Update to get the ratio --------------- """
+--		for quote in quotes:
+--			stock, bid_price, ask_price, price = getDataPoint(quote)
+--			print ("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+--
+--		print ("Ratio %s" % getRatio(price, price))
+-+    # Query the price once every N seconds.
+-+    for _ in range(N):
+-+        quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
+-+
+-+        """ ----------- Update to get the ratio --------------- """
+-+        prices = {}
+-+        for quote in quotes:
+-+            stock, bid_price, ask_price, price = getDataPoint(quote)
+-+            prices[stock] = price
+-+            print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+-+
+-+        print("Ratio %s" % (getRatio(prices['ABC'], prices['DEF'])))
+--- 
+-2.37.3.windows.1
+-
+diff --git a/__pycache__/client3.cpython-310.pyc b/__pycache__/client3.cpython-310.pyc
+index 7aabc0be566a87cbaf7b5696223b176da62eeefb..9ee3a9ee36a3745847549b7bbbe618e47d3ee16b 100644
+GIT binary patch
+delta 649
+zcmZ8f!EVz)5Zzg?opoZDq)FXW1(XA-C<i!Ixl~j%EkdePpb-aFKoqjmDy<XKb#g&Q
+z90DAXDt`dUjVu4a2Ox3tA0Q!d=?5@Q=!KQ$&Ai!J&Aicml|Q8)`F@enxvVvNpD+9y
+z@4pk#Ohd@j!h?c2=gQJt32iA`3vGX3%F&K4kT0Or@{F5T=%PJ=J@#@(6_HI#Xq|df
+zAH{SDVG1)ggBeV(<zAIt)@Q1MWvZ^LWpr?P0xyI*sH&P;Q2_>6!Rj`{RqbLGYq)~J
+zu?W}%fSorfTf_oZbZLzddTVUL|J^k-v}yb{+w?DfKZ4zK3+`<s)+*EXI(sJ)NO)o;
+z;#g3H^S0S|Vj?~6VWS&{=|?!Qe{ots`UAG0lsf$Jjt3qXpK`tY;_BpaZY{DnAaGd%
+z8fXax&D$&?w$7-7m44#4qyefpG^O+#uiq|FZ06uml*tnu9d$?j=nk=15^yd-fK31J
+z)>&pf*llIj-u}bQx)P^xG|U{+9qMSHmc}Lw`>*dBJRf5`%A5sP_S0wkN6#}joKJ0*
+z=1n@CVRwL?PG-~V6U>03FzV_!D_p%#zgRcN%6Vh@J&a90h{+WiH;4R>7(tNPR4^PZ
+r1pF^$dqBGk@qR8h-XM@Q2_(i6mb7G1x*l%;=OhlwWC2{~;!^Ox!$FOy
+
+delta 624
+zcmYjNJ#Q015WU&myW8^@#&PUWfQ%GHasxslP55X`BqXE&i6|I>P8aVua&q>Oy>o+%
+zC`^yS{Q<i{{0IvE1KpK$^w6_=P9%1<@6GJY&d!^k@|&zD^?JoI>vMX4cyLj_`SH7P
+zl%pVa5K3mqO6JH*7AO=$S8?=|Q0^xOedQ_Nu%tlAGp3O$R3&c#3wYwZ-NhR5Wu4%(
+zvAjm^vPohoR?Z4mu)J;=TY*C@li9`%8u+xafHwl$xQQL?(v}LSO`FuA?nrc;1%Pw@
+zz}!|yQkS|5c6qm>;K;On<n*f-f1bi#{s`{g{vhTsXLCLmBVi)$`@P-^ov7K6dQlwr
+zl2QHzp5?z_7b^J{dwx$q4Rp;+V94xHE|;~zoPjy1G!U3we#P>yY<vH=4Qe~aK12VV
+z9uFyuu8iX{u!gEhDdY)dhfy|8`o>E=1B@{cd5aGw{TtYr={O!A-_dkFqclTr?H3{&
+zPYA_nnoQBt(NrZ9bYH&OKYU%lLD{ozl;y*48ciq+3o*_}7p}=Yp#s9fjgv^F=wDUN
+zfACvp+Bc81Rj92p9as<s3fBmkX8(0>1?shghZ8fzm>yf<>9zscmSDHwf=ea?={I=~
+O7?aS14z!v0EBHThJc?QX
+
+diff --git a/client_test.py b/client_test.py
+index 7a31b8e..9db53d4 100644
+--- a/client_test.py
++++ b/client_test.py
+@@ -1,5 +1,5 @@
+ import unittest
+-from client3 import getDataPoint, getRatio
++from client3 import *
+ 
+ class ClientTest(unittest.TestCase):
+   def test_getDataPoint_calculatePrice(self):
+-- 
+2.37.3.windows.1
+
